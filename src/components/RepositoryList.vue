@@ -11,25 +11,37 @@ import axios from 'axios'
 
 export default {
     name:"RepositoryList",
+    props:["refresh"],
     data () {
-    return {
-      repositories: [
-        ]
-    }
-  },
-
-  methods:{
-        getAccessToken(){
-             return localStorage.getItem('access-token')
+        return {
+            repositories: [
+            ]
         }
     },
-
     created(){
-        console.log('get data');
-        var token = this.getAccessToken();
-        axios.get(`https://cors-anywhere.herokuapp.com/https://api.github.com/user/repos?${token}`)
-          .then(res => this.repositories = res.data)
-          .catch(error => console.log(error));
+                var token = this.getAccessToken();
+                axios.get(`https://cors-anywhere.herokuapp.com/https://api.github.com/user/repos?${token}`)
+                    .then(res => this.repositories = res.data)
+                    .catch(error => console.log(error));
+    },
+    watch: {
+        refresh: 'fetchData'
+    },
+    methods:{
+        getAccessToken(){
+             return localStorage.getItem('access-token')
+        },
+        fetchData : function(){
+            if(this.refresh)
+            {
+                console.log('get data');
+                var token = this.getAccessToken();
+                axios.get(`https://cors-anywhere.herokuapp.com/https://api.github.com/user/repos?${token}`)
+                    .then(res => this.repositories = res.data)
+                    .catch(error => console.log(error));
+                this.refresh = false;
+            }
+        }
     }
 }
 </script>

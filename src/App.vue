@@ -1,7 +1,6 @@
 <template>
   <div id="app">
     <Header/>
-    
     <router-view />
   </div>
 </template>
@@ -84,8 +83,4 @@ h1, h2 {
   margin-top: 20px;
   padding: 20px;
 }
-
-
-
-
 </style>
