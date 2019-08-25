@@ -1,25 +1,25 @@
 <template>
     <div class="view">
-        <h1>{{repoInfo.name}} Repository Detail </h1>
-        <p>Id: {{repoInfo.id}}</p>
-        <p>Full Name: {{repoInfo.full_name}}</p>
-        <p>Owner: {{repoInfo.owner.login}}</p>
-
+        <h1 v-if="repoInfo">{{repoInfo.name}} Repository Detail </h1>
+        <p v-if="repoInfo">Id: {{repoInfo.id}}</p>
+        <p v-if="repoInfo">Full Name: {{repoInfo.full_name}}</p>
+        <p v-if="repoInfo">Owner: {{repoInfo.owner.login}}</p>
+        <RepoCommits v-if="repoInfo" v-bind:fullname="repoInfo.full_name" />
     </div>
 </template>
 
 <script>
 import axios from 'axios'
-
+import RepoCommits from '../components/RepoCommits'
 export default {
     data(){
         return{
-            repoInfo:{
-                owner :{}
-            }
+            repoInfo: null
         }
     },
-
+    components:{
+        RepoCommits
+    },
     methods:{
         getAccessToken(){
              return localStorage.getItem('access-token')
