@@ -30,8 +30,7 @@ export default {
        
         var token = this.getAccessToken();
         axios.get(`https://cors-anywhere.herokuapp.com/https://api.github.com/repos/${this.$route.params.owner}/${this.$route.params.repo}?${token}`)
-          .then(res => 
-              this.repoInfo = res.data)
+          .then(res => this.repoInfo = res.data)
           .catch(error => console.log(error));
     }
 
