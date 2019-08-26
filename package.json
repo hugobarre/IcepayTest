@@ -1,13 +1,13 @@
 {
   "name": "icepay-app",
-  "description": "Front-end assignment",
   "version": "1.0.0",
-  "author": "Hugo Barrenechea ",
-  "license": "MIT",
   "private": true,
+  "description": "Front-end assignment",
+  "author": "Hugo Barrenechea ",
   "scripts": {
+    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot",
-    "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
+    "test:e2e": "vue-cli-service test:e2e"
   },
   "dependencies": {
     "axios": "^0.19.0",
@@ -19,12 +19,8 @@
     "vue-router": "^3.1.2",
     "vuesax": "^3.9.0"
   },
-  "browserslist": [
-    "> 1%",
-    "last 2 versions",
-    "not ie <= 8"
-  ],
   "devDependencies": {
+    "@vue/cli-plugin-e2e-cypress": "^3.11.0",
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
@@ -36,5 +32,11 @@
     "vue-template-compiler": "^2.4.4",
     "webpack": "^3.6.0",
     "webpack-dev-server": "^2.9.1"
-  }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
+  "license": "MIT"
 }
