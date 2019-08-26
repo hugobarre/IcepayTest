@@ -19,10 +19,6 @@ export default {
       msg: 'Welcome to a Vue.js frontend assignment'
     }
   },
-   beforeCreated () {
-     console.log("before");
-   },
-
   created(){
 
       this.authorize();      
@@ -38,6 +34,7 @@ export default {
             this.setAuthCode(code)
         }
         else{
+          if(!this.getAccessToken())
              var codenew = window.location.search.substring(window.location.search.indexOf('=') + 1);
             axios.post(`https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token?client_id=14c13dbddc3c629cb068&redirect_uri=http://localhost:8080/home&client_secret=eba91738d0cb7bff93b101e59dccd5715152fa91&code=${codenew}`)
             .then(res => 
@@ -59,6 +56,10 @@ export default {
 
     setAccessToken(accessToken) {
         localStorage.setItem('access-token', accessToken);
+    },
+
+    getAccessToken() {
+        localStorage.getItem('access-token', accessToken);
     }
   }
   
