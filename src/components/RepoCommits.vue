@@ -1,10 +1,10 @@
 <template>
    <div class="commits">
        <p>Repo commits </p>
-        <ul>
+        <ul data-cy="commits">
             <li v-if="commits==null">No commits found</li>
             <li v-for="record in commits" v-bind:key="record.sha">
-                <a  class="commit">{{ record.sha.slice(0, 7) }}</a>
+                <a data-cy="commit"  class="commit">{{ record.sha.slice(0, 7) }}</a>
                 - <span class="message">{{ record.commit.message | truncate }}</span><br>
                 by <span class="author"> {{ record.commit.author.name }}</span>
                 at <span class="date">{{ record.commit.author.date | formatDate }}</span>
