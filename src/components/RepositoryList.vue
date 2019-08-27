@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div data-cy="repos">
         <div v-bind:key="repository.id" v-for="repository in repositories" class="repos">
             <a v-bind:href="'#/repodetail/' + repository.owner.login + '/' + repository.name" >{{repository.name}}</a>
         </div>

@@ -16,7 +16,7 @@
                   <span>Home Page:</span>   <vs-input class="inputx" v-model="repo.homePage"/>
                 </div>
 
-                <div class="add">  <vs-button   @click="addRepo()" type="filled">Add</vs-button></div>
+                <div class="add" >  <vs-button  data-cy="addButton"  @click="addRepo()" type="filled">Add</vs-button></div>
             </template>
             <template slot="footer">
             </template>
@@ -70,6 +70,7 @@ export default {
              axios.post(`https://cors-anywhere.herokuapp.com/https://api.github.com/user/repos?${token}`,repo)
             .then(res => {
               console.log(res.data);
+
               this.isShow = false;
               this.refresh = true;
             })

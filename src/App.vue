@@ -19,32 +19,40 @@ export default {
       msg: 'Welcome to a Vue.js frontend assignment'
     }
   },
-  created(){
-
+  mounted(){
       this.authorize();      
-      
   },
   methods:{
-    authorize(authCode) {
-        authCode = authCode || this.getAuthCode()
-        console.log(authCode);
-        if(!authCode) {
-            window.location.replace(`https://github.com/login/oauth/authorize?client_id=14c13dbddc3c629cb068&redirect_uri=http://localhost:8080/home`)
-            const code =  window.location.search.substring(window.location.search.indexOf('=') + 1);
-            this.setAuthCode(code)
-        }
-        else{
-          if(!this.getAccessToken())
-             var codenew = window.location.search.substring(window.location.search.indexOf('=') + 1);
-            axios.post(`https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token?client_id=14c13dbddc3c629cb068&redirect_uri=http://localhost:8080/home&client_secret=eba91738d0cb7bff93b101e59dccd5715152fa91&code=${codenew}`)
-            .then(res => 
-              this.setAccessToken(res.data))
-            .catch(error => console.log(error));
-        }
-        
+    authorize() {
+        var authCode =  this.getAuthCode()
 
-        
+        if(!this.codeRequested() && !authCode) {
+            window.location.replace(`https://github.com/login/oauth/authorize?client_id=14c13dbddc3c629cb068&redirect_uri=http://localhost:8080`);
+         }
+        else
+        {
+            if(!authCode){
+                const code =  window.location.search.substring(window.location.search.indexOf('=') + 1);
+                this.setAuthCode(code);
+                var token = this.getAccessToken();
+                if(!token)
+                {
+                  axios.post(`https://cors-anywhere.herokuapp.com/https://github.com/login/oauth/access_token?client_id=14c13dbddc3c629cb068&redirect_uri=http://localhost:8080&client_secret=eba91738d0cb7bff93b101e59dccd5715152fa91&code=${code}`)
+                    .then(res => 
+                      this.setAccessToken(res.data))
+                    .catch(error => console.log(error));   
+                }
+            } 
+        }
     },
+    
+    codeRequested(){
+        if( window.location.search.indexOf('code') > 0)
+          return true;
+        else 
+          return false;
+    },
+
 
     getAuthCode() {
         return localStorage.getItem('auth-code')
@@ -59,7 +67,7 @@ export default {
     },
 
     getAccessToken() {
-        localStorage.getItem('access-token', accessToken);
+        localStorage.getItem('access-token');
     }
   }
   
