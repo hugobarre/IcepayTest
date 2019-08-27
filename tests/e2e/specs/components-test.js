@@ -472,3 +472,19 @@ describe('Test Repositories List Component', () => {
         cy.get('[data-cy=commits] li').children('a').should('have.class', 'commit')       
     });
   })
+
+
+
+  describe('Test Header Component', () => {
+    beforeEach(()=> { 
+      window.localStorage.setItem('auth-code', "test")
+      window.localStorage.setItem('access-token', "test")
+  
+      cy.visit('http://localhost:8080/');
+  
+      });
+  
+    it('check language chaging', () => {
+      cy.get('.lan-button').children().should('have.length', 2);
+    });
+  })
