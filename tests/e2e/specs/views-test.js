@@ -28,7 +28,7 @@ describe('Test respostories page modal', () => {
     
    it('Check for close modal', () => {
       cy.get('.vs-button').contains('Add Repository').click().get('.vsm-modal').contains('Add new repository');
-      cy.get('.btn-close').click();
+      cy.get('.btn-close').click().get('.vsm-modal').should('not.visible');
    });
  })
   

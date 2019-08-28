@@ -1,7 +1,7 @@
 <template>
     <header class="header">
         <div> 
-            <vs-button type="line" class=".lan-button"  v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)"> 
+            <vs-button type="line" v-bind:data-cy="entry.language"  v-for="entry in languages" :key="entry.title" @click="changeLocale(entry.language)"> 
                        <flag :iso="entry.flag" v-bind:squared=false /> {{entry.title}}    
             </vs-button>
         </div>
@@ -9,16 +9,16 @@
         <img class="logo" src="https://icepay.com/app/themes/icepay/dist/images/logos/logo_icepay.svg">
         <vs-navbar v-model="activeItem" class="nabarx nav">
             <div slot="title">
-                <vs-navbar-title>
+                <vs-navbar-title data-cy="menu-title">
                      {{ $t('title') }}
                 </vs-navbar-title>
             </div>
 
             <vs-navbar-item index="0" class="tab">
-                <a href="#/"> {{ $t('homeTab') }}</a>
+                <a data-cy="tab-home" href="#/"> {{ $t('homeTab') }}</a>
             </vs-navbar-item>
             <vs-navbar-item index="1" class="tab">
-                <a href="#/repositories"> {{ $t('repoTab') }}</a>
+                <a data-cy="tab-repo" href="#/repositories"> {{ $t('repoTab') }}</a>
             </vs-navbar-item>
             </vs-navbar>
 

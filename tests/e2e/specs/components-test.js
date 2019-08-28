@@ -485,6 +485,15 @@ describe('Test Repositories List Component', () => {
       });
   
     it('check language chaging', () => {
-      cy.get('.lan-button').children().should('have.length', 2);
+
+        cy.get('[data-cy=en]').click()
+        .get('[data-cy=menu-title]').contains('VueJS Application')
+        .get('[data-cy=tab-home]').contains('Home')
+        .get('[data-cy=tab-repo]').contains('Repositories')
+
+        cy.get('[data-cy=es]').click()
+            .get('[data-cy=menu-title]').contains('Aplicacion VueJS')
+            .get('[data-cy=tab-home]').contains('Inicio')
+            .get('[data-cy=tab-repo]').contains('Repositorios')
     });
   })
